@@ -10,7 +10,7 @@ class Automaton():
         Returns true if the config file is valid,
         and raises a ValidationException if the config is invalid.
         """
-        return "I can't tell if the config file is valid... yet!"
+        return "test here"
 
     def accepts_input(self, input_str):
         """Return a Boolean
