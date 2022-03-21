@@ -1,0 +1,38 @@
+#
+# comment lines ( skip them )
+#
+Sigma :
+    abcd
+
+    dfa
+
+
+End
+
+#
+#
+# comment lines ( skip them )
+#
+States :
+    q1,
+    q2, F
+    q0 , s
+
+
+    q3 , F
+
+End
+#
+#
+#
+
+#
+
+#
+# comment lines ( skip them )
+#
+Transitions :
+    q0, abcd , q2
+
+    q1, dfa , q3
+End
