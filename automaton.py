@@ -10,7 +10,7 @@ class Automaton():
         Returns true if the config file is valid,
         and raises a ValidationException if the config is invalid.
         """
-        with open("input.txt") as fin:
+        with open(self.config_file) as fin:
             lines = [line for line in fin if not line.startswith('#') and line != '\n']
 
         start_state = ''
@@ -24,18 +24,22 @@ class Automaton():
         no_start = 0
 
         for line in lines:
-            if line.strip().startswith('End'):
+            temp = line.split()
+            general_cond = True if len(temp) == 2 and temp[1] == ':' else False
+            if not isWords and not isTransitions and not isStates and not(general_cond and temp[0] in {"Sigma" : 1, "Transitions" : 2, "States" : 3}):
+                raise Exception('ValidationException')
+            if line.startswith('End'):
                 if isWords:
                     isWords = False
                 elif isStates:
                     isStates = False
                 elif isTransitions:
                     isTransitions = False
-            elif line.strip().startswith("Sigma"):
+            elif temp[0] == "Sigma":
                 isWords = True
-            elif line.strip().startswith("Transitions"):
+            elif temp[0] == "Transitions":
                 isTransitions = True
-            elif line.strip().startswith("States"):
+            elif temp[0] == "States":
                 isStates = True
             else:
                 if isStates:
@@ -81,13 +85,15 @@ class Automaton():
 
     def read_input(self, input_str):
         """Return the automaton's final configuration
-        
+
         If the input is rejected, the method raises a
         RejectionException.
         """
         pass
-    
+
 
 if __name__ == "__main__":
-    a = Automaton('your_config_file')
+    a = Automaton('input.txt')
     print(a.validate())
+
+
